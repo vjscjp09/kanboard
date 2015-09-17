@@ -35,7 +35,7 @@ The development services listed are examples of what Shipped calls "microservice
 
 #### Step 5.1 Select a service type.
  
-For this project we will select **"Express JS"** which create Node JS VM
+For this project we will select **"Python"** which create Node JS VM
 ![](https://github.com/CiscoCloud/kanboard/blob/shipped/images/selectservice.Png)
 
 Click on the Select button to the right of this service. Shipped pops up the Service Configuration form that you'll use to specify the GitHub repository where Shipped will store the source code using the service:
