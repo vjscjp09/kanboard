@@ -6,7 +6,7 @@ Kanboard is a project management software that use the Kanban methodology.
 Official website: <http://kanboard.net>
 
 ## Setting Up on Shipped
-This is an sample project to demonstrate how to create/deploy a Python application using Shipped.
+This is an sample project to demonstrate how to create/deploy a PHP application using Shipped.
 
 ### Step 1. Set Up GitHub
 
@@ -35,7 +35,7 @@ The development services listed are examples of what Shipped calls "microservice
 
 #### Step 5.1 Select a service type.
  
-For this project we will select **"Python"** which create Node JS VM
+For this project we will select **"PHP"** which create PHP installed VM
 ![](https://github.com/CiscoCloud/kanboard/blob/shipped/images/selectservice.Png)
 
 Click on the Select button to the right of this service. Shipped pops up the Service Configuration form that you'll use to specify the GitHub repository where Shipped will store the source code using the service:
