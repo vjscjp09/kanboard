@@ -64,7 +64,6 @@ class Acl extends Base
         'export' => '*',
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
-        'budget' => '*',
         'gantt' => array('project', 'savetaskdate', 'task', 'savetask'),
     );
 
@@ -93,6 +92,18 @@ class Acl extends Base
         'currency' => '*',
         'twofactor' => array('disable'),
     );
+
+    /**
+     * Extend ACL rules
+     *
+     * @access public
+     * @param string $acl_name
+     * @param aray   $rules
+     */
+    public function extend($acl_name, array $rules)
+    {
+        $this->$acl_name = array_merge($this->$acl_name, $rules);
+    }
 
     /**
      * Return true if the specified controller/action match the given acl

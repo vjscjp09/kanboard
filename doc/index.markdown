@@ -26,7 +26,6 @@ Using Kanboard
 - [Project permissions](project-permissions.markdown)
 - [Swimlanes](swimlanes.markdown)
 - [Calendar](calendar.markdown)
-- [Budget](budget.markdown)
 - [Analytics](analytics.markdown)
 - [Gantt chart for tasks](gantt-chart-tasks.markdown)
 - [Gantt chart for projects](gantt-chart-projects.markdown)
@@ -49,8 +48,6 @@ Using Kanboard
 
 - [User management](user-management.markdown)
 - [Notifications](notifications.markdown)
-- [Hourly rate](hourly-rate.markdown)
-- [Timetable](timetable.markdown)
 - [Two factor authentication](2fa.markdown)
 
 ### Settings
@@ -78,6 +75,7 @@ Using Kanboard
 - [RSS/Atom subscriptions](rss.markdown)
 - [Json-RPC API](api-json-rpc.markdown)
 - [Webhooks](webhooks.markdown)
+- [Plugins](plugins.markdown)
 
 ### More
 
@@ -104,6 +102,7 @@ Technical details
 - [Installation on Heroku](heroku.markdown)
 - [Example with Nginx + HTTPS + SPDY + PHP-FPM](nginx-ssl-php-fpm.markdown)
 - [Run Kanboard with Docker](docker.markdown)
+- [Run Kanboard with Vagrant](vagrant.markdown)
 
 ### Configuration
 
@@ -133,7 +132,6 @@ Technical details
 - [Coding standards](coding-standards.markdown)
 - [Running tests](tests.markdown)
 - [Build assets](assets.markdown)
-- [Run Kanboard with Vagrant](vagrant.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.

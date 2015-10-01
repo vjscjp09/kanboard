@@ -6,7 +6,17 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 66;
+const VERSION = 67;
+
+function version_67($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE plugin_schema_versions (
+            plugin VARCHAR(80) NOT NULL PRIMARY KEY,
+            version INTEGER NOT NULL DEFAULT 0
+        )
+    ");
+}
 
 function version_66($pdo)
 {
@@ -151,7 +161,6 @@ function version_50($pdo)
     $result = $rq->fetch(PDO::FETCH_ASSOC);
 
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
     $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
     $rq->execute(array('calendar_user_tasks', 'date_started'));
     $rq->execute(array('calendar_project_tasks', 'date_started'));
@@ -303,72 +312,6 @@ function version_35($pdo)
 function version_34($pdo)
 {
     $pdo->exec("ALTER TABLE subtask_time_tracking ADD COLUMN time_spent REAL DEFAULT 0");
-}
-
-function version_33($pdo)
-{
-    $pdo->exec('CREATE TABLE budget_lines (
-        "id" SERIAL PRIMARY KEY,
-        "project_id" INTEGER NOT NULL,
-        "amount" REAL NOT NULL,
-        "date" VARCHAR(10) NOT NULL,
-        "comment" TEXT,
-        FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
-    )');
-}
-
-function version_32($pdo)
-{
-    $pdo->exec('CREATE TABLE timetable_day (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "start" VARCHAR(5) NOT NULL,
-        "end" VARCHAR(5) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-
-    $pdo->exec('CREATE TABLE timetable_week (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "day" INTEGER NOT NULL,
-        "start" VARCHAR(5) NOT NULL,
-        "end" VARCHAR(5) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-
-    $pdo->exec('CREATE TABLE timetable_off (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "date" VARCHAR(10) NOT NULL,
-        "all_day" BOOLEAN DEFAULT \'0\',
-        "start" VARCHAR(5) DEFAULT 0,
-        "end" VARCHAR(5) DEFAULT 0,
-        "comment" TEXT,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-
-    $pdo->exec('CREATE TABLE timetable_extra (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "date" VARCHAR(10) NOT NULL,
-        "all_day" BOOLEAN DEFAULT \'0\',
-        "start" VARCHAR(5) DEFAULT 0,
-        "end" VARCHAR(5) DEFAULT 0,
-        "comment" TEXT,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-}
-
-function version_31($pdo)
-{
-    $pdo->exec("CREATE TABLE hourly_rates (
-        id SERIAL PRIMARY KEY,
-        user_id INTEGER NOT NULL,
-        rate REAL DEFAULT 0,
-        date_effective INTEGER NOT NULL,
-        currency CHAR(3) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )");
 }
 
 function version_30($pdo)

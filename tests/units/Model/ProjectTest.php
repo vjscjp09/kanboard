@@ -26,7 +26,7 @@ class ProjectTest extends Base
             $this->assertNotFalse($p->create(array('name' => 'UnitTest '.$locale)), 'Unable to create project with '.$locale.':'.$language);
         }
 
-        Translator::load('en_US');
+        Translator::unload();
     }
 
     public function testCreation()
@@ -131,6 +131,17 @@ class ProjectTest extends Base
         $project = $p->getById(1);
         $this->assertNotEmpty($project);
         $this->assertGreaterThan($now, $project['last_modified']);
+    }
+
+    public function testGetAllIds()
+    {
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+
+        $this->assertEmpty($p->getAllByIds(array()));
+        $this->assertNotEmpty($p->getAllByIds(array(1, 2)));
+        $this->assertCount(1, $p->getAllByIds(array(1)));
     }
 
     public function testIsLastModified()

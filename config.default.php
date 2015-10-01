@@ -10,6 +10,9 @@ define('DEBUG', false);
 // Debug file path
 define('DEBUG_FILE', __DIR__.'/data/debug.log');
 
+// Plugins directory
+define('PLUGINS_DIR', 'data/plugins');
+
 // Folder for uploaded files, don't forget the trailing slash
 define('FILES_DIR', 'data/files/');
 
@@ -100,10 +103,10 @@ define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 // Name of an attribute of the user account object which should be used as the email of the user.
 define('LDAP_ACCOUNT_EMAIL', 'mail');
 
-// Name of an attribute of the user account object which should be used as the id of the user.
+// Name of an attribute of the user account object which should be used as the id of the user. (optional)
 // Example for ActiveDirectory: 'samaccountname'
 // Example for OpenLDAP: 'uid'
-define('LDAP_ACCOUNT_ID', 'samaccountname');
+define('LDAP_ACCOUNT_ID', '');
 
 // LDAP Attribute for group membership
 define('LDAP_ACCOUNT_MEMBEROF', 'memberof');

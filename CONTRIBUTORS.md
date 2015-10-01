@@ -7,6 +7,7 @@ Contributors:
 
 - Alex Butum
 - [Aleix Pol](https://github.com/aleixpol)
+- [Anjar Febrianto](https://github.com/Lasut)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
 - [Christian González](https://github.com/nerdoc)
@@ -37,6 +38,7 @@ Contributors:
 - [Jean-François Magnier](https://github.com/lefakir)
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
 - [Jesús Marín](https://github.com/alu0100502114)
+- [Jules Verhaeren](https://github.com/julesverhaeren)
 - [Karol J](https://github.com/dzudek)
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)
@@ -49,6 +51,7 @@ Contributors:
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
+- [Max Kamashev](https://github.com/ukko)
 - [mfoucrier](https://github.com/mfoucrier)
 - [Mgro](https://github.com/mgro)
 - [Michael Lüpkes](https://github.com/mluepkes)

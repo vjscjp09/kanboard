@@ -20,6 +20,8 @@
                 <?= $this->url->link(t('Persistent connections'), 'user', 'sessions', array('user_id' => $user['id'])) ?>
             </li>
         <?php endif ?>
+
+        <?= $this->hook->render('template:user:sidebar:information') ?>
     </ul>
 
     <h2><?= t('Actions') ?></h2>
@@ -60,13 +62,9 @@
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'authentication' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Edit Authentication'), 'user', 'authentication', array('user_id' => $user['id'])) ?>
             </li>
-            <li <?= $this->app->getRouterController() === 'hourlyrate' ? 'class="active"' : '' ?>>
-                <?= $this->url->link(t('Hourly rates'), 'hourlyrate', 'index', array('user_id' => $user['id'])) ?>
-            </li>
-            <li <?= $this->app->getRouterController() === 'timetable' ? 'class="active"' : '' ?>>
-                <?= $this->url->link(t('Manage timetable'), 'timetable', 'index', array('user_id' => $user['id'])) ?>
-            </li>
         <?php endif ?>
+
+        <?= $this->hook->render('template:user:sidebar:actions', array('user' => $user)) ?>
 
         <?php if ($this->user->isAdmin() && ! $this->user->isCurrentUser($user['id'])): ?>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'remove' ? 'class="active"' : '' ?>>

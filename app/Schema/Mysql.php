@@ -6,7 +6,18 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 86;
+const VERSION = 87;
+
+function version_87($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE plugin_schema_versions (
+            plugin VARCHAR(80) NOT NULL,
+            version INT NOT NULL DEFAULT 0,
+            PRIMARY KEY(plugin)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_86($pdo)
 {
@@ -155,7 +166,6 @@ function version_69($pdo)
     $result = $rq->fetch(PDO::FETCH_ASSOC);
 
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
     $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
     $rq->execute(array('calendar_user_tasks', 'date_started'));
     $rq->execute(array('calendar_project_tasks', 'date_started'));
@@ -309,78 +319,6 @@ function version_54($pdo)
 function version_53($pdo)
 {
     $pdo->exec("ALTER TABLE subtask_time_tracking ADD COLUMN time_spent FLOAT DEFAULT 0");
-}
-
-function version_52($pdo)
-{
-    $pdo->exec('CREATE TABLE budget_lines (
-        `id` INT NOT NULL AUTO_INCREMENT,
-        `project_id` INT NOT NULL,
-        `amount` FLOAT NOT NULL,
-        `date` VARCHAR(10) NOT NULL,
-        `comment` TEXT,
-        FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
-        PRIMARY KEY(id)
-    ) ENGINE=InnoDB CHARSET=utf8');
-}
-
-function version_51($pdo)
-{
-    $pdo->exec('CREATE TABLE timetable_day (
-        id INT NOT NULL AUTO_INCREMENT,
-        user_id INT NOT NULL,
-        start VARCHAR(5) NOT NULL,
-        end VARCHAR(5) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-        PRIMARY KEY(id)
-    ) ENGINE=InnoDB CHARSET=utf8');
-
-    $pdo->exec('CREATE TABLE timetable_week (
-        id INT NOT NULL AUTO_INCREMENT,
-        user_id INTEGER NOT NULL,
-        day INT NOT NULL,
-        start VARCHAR(5) NOT NULL,
-        end VARCHAR(5) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-        PRIMARY KEY(id)
-    ) ENGINE=InnoDB CHARSET=utf8');
-
-    $pdo->exec('CREATE TABLE timetable_off (
-        id INT NOT NULL AUTO_INCREMENT,
-        user_id INT NOT NULL,
-        date VARCHAR(10) NOT NULL,
-        all_day TINYINT(1) DEFAULT 0,
-        start VARCHAR(5) DEFAULT 0,
-        end VARCHAR(5) DEFAULT 0,
-        comment TEXT,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-        PRIMARY KEY(id)
-    ) ENGINE=InnoDB CHARSET=utf8');
-
-    $pdo->exec('CREATE TABLE timetable_extra (
-        id INT NOT NULL AUTO_INCREMENT,
-        user_id INT NOT NULL,
-        date VARCHAR(10) NOT NULL,
-        all_day TINYINT(1) DEFAULT 0,
-        start VARCHAR(5) DEFAULT 0,
-        end VARCHAR(5) DEFAULT 0,
-        comment TEXT,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-        PRIMARY KEY(id)
-    ) ENGINE=InnoDB CHARSET=utf8');
-}
-
-function version_50($pdo)
-{
-    $pdo->exec("CREATE TABLE hourly_rates (
-        id INT NOT NULL AUTO_INCREMENT,
-        user_id INT NOT NULL,
-        rate FLOAT DEFAULT 0,
-        date_effective INTEGER NOT NULL,
-        currency CHAR(3) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-        PRIMARY KEY(id)
-    ) ENGINE=InnoDB CHARSET=utf8");
 }
 
 function version_49($pdo)

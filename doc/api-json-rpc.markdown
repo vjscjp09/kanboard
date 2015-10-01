@@ -69,6 +69,7 @@ If there is an authentication error, you will receive the HTTP status code `401 
 - getMyActivityStream
 - createMyPrivateProject
 - getMyProjectsList
+- getMyProjects
 - getTimezone
 - getVersion
 - getDefaultTaskColor
@@ -84,6 +85,8 @@ If there is an authentication error, you will receive the HTTP status code `401 
 - createTask
 - updateTask
 - getBoard
+- getProjectActivity
+- getMyOverdueTasks
 
 ### Custom HTTP header
 
@@ -2448,6 +2451,55 @@ Response example:
 }
 ```
 
+### getOverdueTasksByProject
+
+- Purpose: **Get all overdue tasks for a special project**
+- Result on success: **List of tasks**
+- Result on failure: **false**
+
+Request example to fetch all tasks on the board:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getOverdueTasksByProject",
+    "id": 133280317,
+    "params": {
+        "project_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 133280317,
+    "result": [
+        {
+            "id": "1",
+            "title": "Task #1",
+            "date_due": "1409961789",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        {
+            "id": "2",
+            "title": "Test",
+            "date_due": "1409962115",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        ...
+    ]
+}
+```
+
 ### updateTask
 
 - Purpose: **Update a task**
@@ -4364,5 +4416,98 @@ Response example:
     "result": {
         "2": "my project"
     }
+}
+```
+### getMyOverdueTasks
+
+- Purpose: **Get my overdue tasks**
+- Result on success: **List of tasks**
+- Result on failure: **false**
+
+Request example to fetch all tasks on the board:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getMyOverdueTasks",
+    "id": 133280317
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 133280317,
+    "result": [
+        {
+            "id": "1",
+            "title": "Task #1",
+            "date_due": "1409961789",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        {
+            "id": "2",
+            "title": "Test",
+            "date_due": "1409962115",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        ...
+    ]
+}
+```
+
+### getMyProjects
+
+- Purpose: **Get projects of connected user with full details**
+- Parameters:
+    - **none**
+- Result on success: **List of projects with details**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getmyProjects",
+    "id": 2134420212
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2134420212,
+    "result": [
+        {
+            "id": "1",
+            "name": "API test",
+            "is_active": "1",
+            "token": "",
+            "last_modified": "1436119570",
+            "is_public": "0",
+            "is_private": "0",
+            "is_everybody_allowed": "0",
+            "default_swimlane": "Default swimlane",
+            "show_default_swimlane": "1",
+            "description": null,
+            "identifier": "",
+            "url": {
+                "board": "http:\/\/127.0.0.1:8000\/?controller=board&action=show&project_id=1",
+                "calendar": "http:\/\/127.0.0.1:8000\/?controller=calendar&action=show&project_id=1",
+                "list": "http:\/\/127.0.0.1:8000\/?controller=listing&action=show&project_id=1"
+            }
+        }
+    ]
 }
 ```
