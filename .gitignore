@@ -57,3 +57,4 @@ config.php
 data/files
 data/cache
 /vendor
+.shipped
